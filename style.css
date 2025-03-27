@@ -722,41 +722,44 @@ footer {
     border-bottom: none;
 }
 
-/* Schedule styles */
+/* Schedule styles - improved responsive behavior */
 .schedule-container {
-    padding: 1.5rem;
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-top: 1rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 1.5rem;
+    box-sizing: border-box;
 }
 
-.print-schedule {
-    margin-bottom: 1.5rem;
+/* Create a wrapper for the schedule table that enables horizontal scrolling */
+.schedule-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin-bottom: 1rem;
+    /* Show subtle scroll indicators */
+    background-image: 
+        linear-gradient(to right, white, white),
+        linear-gradient(to right, white, white),
+        linear-gradient(to right, rgba(0,0,0,0.05), rgba(255,255,255,0)),
+        linear-gradient(to left, rgba(0,0,0,0.05), rgba(255,255,255,0));
+    background-position: left center, right center, left center, right center;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size: 20px 100%, 20px 100%, 10px 100%, 10px 100%;
+    background-attachment: local, local, scroll, scroll;
 }
 
-.empty-schedule {
-    text-align: center;
-    padding: 3rem;
-    color: var(--gray-600);
-    background-color: var(--gray-100);
-    border-radius: 8px;
-    font-size: 1.1rem;
-}
-
-.schedule-header h3 {
-    text-align: center;
-    font-size: 1.5rem;
-    color: var(--primary-blue);
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
+/* Schedule table style adjustments */
 .schedule-table {
+    min-width: 750px; /* Minimum width for readability */
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 2rem;
+    margin: 0;
+    table-layout: fixed; /* Fixed layout to control column widths */
     font-size: 0.9rem;
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
@@ -771,6 +774,20 @@ footer {
     position: relative;
 }
 
+/* Equal width columns for days of the week */
+.schedule-table th:not(:first-child),
+.schedule-table td:not(:first-child) {
+    width: calc((100% - 90px) / 5); /* Split remaining width equally among 5 days */
+}
+
+/* Fixed width for time column */
+.schedule-table th:first-child,
+.schedule-table td:first-child.time-cell {
+    width: 90px;
+    min-width: 90px;
+    max-width: 90px;
+}
+
 .time-cell {
     background-color: var(--light-blue);
     color: var(--primary-blue);
@@ -779,8 +796,8 @@ footer {
     font-size: 0.85rem;
     border-right: 2px solid var(--primary-blue);
     text-align: center;
-    width: 90px;
     line-height: 1.3;
+    box-sizing: border-box;
 }
 
 .athletics-cell {
@@ -850,6 +867,57 @@ footer {
     height: auto;
     border-radius: 8px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+/* Add some media query adjustments for better small screen handling */
+@media (max-width: 576px) {
+    .schedule-container {
+        padding: 1rem;
+    }
+    
+    .schedule-table {
+        min-width: 700px; /* Slightly smaller minimum width on very small screens */
+    }
+    
+    /* Make time cells slightly narrower on small screens */
+    .schedule-table th:first-child,
+    .schedule-table td:first-child.time-cell {
+        width: 80px;
+        min-width: 80px;
+        max-width: 80px;
+    }
+    
+    /* Adjust font size for better fit on small screens */
+    .time-cell {
+        font-size: 0.75rem;
+    }
+    
+    .period-courses li {
+        font-size: 0.75rem;
+        padding: 0.25rem;
+    }
+}
+
+.print-schedule {
+    margin-bottom: 1.5rem;
+}
+
+.empty-schedule {
+    text-align: center;
+    padding: 3rem;
+    color: var(--gray-600);
+    background-color: var(--gray-100);
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+.schedule-header h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 /* Term overview styles */
@@ -1496,4 +1564,19 @@ footer {
 .requirements-table td {
     padding-top: 0.85rem;
     padding-bottom: 0.85rem;
+}
+
+/* Move inner schedule table out of container padding */
+.schedule-table-wrapper {
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+    overflow-x: auto;
+    width: calc(100% + 3rem);
+}
+
+/* Make day columns equal width */
+.schedule-table th:not(.time-cell),
+.schedule-table td:not(.time-cell) {
+    width: calc((100% - 90px) / 5); /* Distribute remaining width equally among 5 days */
+    box-sizing: border-box;
 }

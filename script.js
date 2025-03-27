@@ -734,7 +734,14 @@ function updateScheduleView() {
     tbody.appendChild(athleticsRow);
     
     table.appendChild(tbody);
-    scheduleGrid.appendChild(table);
+    
+    // Create a wrapper for the table to enable horizontal scrolling
+    const tableWrapper = document.createElement('div');
+    tableWrapper.className = 'schedule-table-wrapper';
+    tableWrapper.appendChild(table);
+    
+    // Add the wrapped table to the grid
+    scheduleGrid.appendChild(tableWrapper);
         console.log("Added schedule table to the grid");
     
     // Add term schedule view
@@ -2214,7 +2221,14 @@ function createSimpleScheduleView() {
     
     tbody.appendChild(athleticsRow);
     table.appendChild(tbody);
-    grid.appendChild(table);
+    
+    // Create table wrapper for horizontal scrolling
+    const tableWrapper = document.createElement('div');
+    tableWrapper.className = 'schedule-table-wrapper';
+    tableWrapper.appendChild(table);
+    
+    // Append the wrapper to the grid instead of the table directly
+    grid.appendChild(tableWrapper);
     
     // Add term overview
     const termOverview = document.createElement('div');
