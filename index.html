@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phillips Academy Course Selection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Adjusted header content style without the logo */
+        .header-content {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Phillips Academy</h1>
+            <p>Course Selection Portal</p>
+        </div>
+        <div class="user-info">
+            <div class="user-details">
+                <i class="fas fa-user-circle"></i>
+                <span>Welcome, Student</span>
+            </div>
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">2</span>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#courses" class="active"><i class="fas fa-calendar-alt"></i> Spring 2025 Registration</a></li>
+                <li><a href="#schedule"><i class="fas fa-calendar"></i> My Schedule</a></li>
+                <li><a href="#requirements"><i class="fas fa-check-circle"></i> Requirements</a></li>
+                <li><a href="#course-of-study"><i class="fas fa-file-pdf"></i> Course of Study</a></li>
+                <li><a href="#help"><i class="fas fa-question-circle"></i> Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard" class="active-section">
+            <h2>Student Dashboard</h2>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Current Selection</h3>
+                    <p>Selected Courses: <span id="selected-count">0</span>/6</p>
+                    <button class="primary-button">Review Selection</button>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Important Dates</h3>
+                    <ul class="dates-list">
+                        <li>Course Selection Opens: February 25, 2025</li>
+                        <li>Selection Deadline: March 6, 2025</li>
+                        <li>Add/Drop Period: March 25-28, 2025</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="section-subtitle">Diploma Requirements Progress</h3>
+            <div class="requirements-overview">
+                <div class="requirement-card">
+                    <h4>English</h4>
+                    <p>Requirement: 4 years</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 25%"></div>
+                    </div>
+                    <p class="progress-text">1/4 completed</p>
+                </div>
+                <div class="requirement-card">
+                    <h4>Mathematics</h4>
+                    <p>Requirement: Through Math 280 or 340</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 33%"></div>
+                    </div>
+                    <p class="progress-text">1/3 completed</p>
+                </div>
+                <div class="requirement-card">
+                    <h4>World Languages</h4>
+                    <p>Requirement: 3 terms at 300-level or higher</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 33%"></div>
+                    </div>
+                    <p class="progress-text">1/3 completed</p>
+                </div>
+                <div class="requirement-card">
+                    <h4>Science</h4>
+                    <p>Requirement: Two 3-term lab sciences</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 33%"></div>
+                    </div>
+                    <p class="progress-text">1/6 completed</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses">
+            <h2>Spring 2025 Registration</h2>
+            <div class="search-filters">
+                <div class="search-bar">
+                    <input type="text" id="course-search" placeholder="Search by course name, number, or description">
+                    <button class="primary-button" id="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <div class="advanced-filters">
+                    <div class="filter-group">
+                        <label>Term</label>
+                        <select id="term-filter">
+                            <option value="all">All Terms</option>
+                            <option value="fall">Fall (T1)</option>
+                            <option value="winter">Winter (T2)</option>
+                            <option value="spring">Spring (T3)</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Period</label>
+                        <select id="period-filter">
+                            <option value="all">All Periods</option>
+                            <option value="1">Period 1</option>
+                            <option value="2">Period 2</option>
+                            <option value="3">Period 3</option>
+                            <option value="4(L)">Period 4 (Lunch)</option>
+                            <option value="5(L)">Period 5 (Lunch)</option>
+                            <option value="6(L)">Period 6 (Lunch)</option>
+                            <option value="7">Period 7</option>
+                            <option value="Athletics">Athletics Period</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Level</label>
+                        <select id="level-filter">
+                            <option value="all">All Levels</option>
+                            <option value="100">100 - Junior Year</option>
+                            <option value="200">200 - Lower Year</option>
+                            <option value="300">300 - Upper Year</option>
+                            <option value="400">400 - Advanced</option>
+                            <option value="500">500 - College Level</option>
+                            <option value="600">600 - Advanced College Level</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="active-filters" id="active-filters"></div>
+            <div class="department-filters">
+                <button class="dept-button active" data-dept="all">All</button>
+                <button class="dept-button" data-dept="art">Art</button>
+                <button class="dept-button" data-dept="english">English</button>
+                <button class="dept-button" data-dept="history">History & Social Science</button>
+                <button class="dept-button" data-dept="math">Mathematics</button>
+                <button class="dept-button" data-dept="music">Music</button>
+                <button class="dept-button" data-dept="science">Science</button>
+                <button class="dept-button" data-dept="philosophy">Philosophy & Religious Studies</button>
+                <button class="dept-button" data-dept="pe">Physical Education</button>
+                <button class="dept-button" data-dept="theatre">Theatre & Dance</button>
+                <button class="dept-button" data-dept="language">World Languages</button>
+            </div>
+            <div class="course-grid" id="course-list"></div>
+        </section>
+        
+
+        <section id="schedule">
+            <h2>My Schedule</h2>
+            <div class="schedule-container">
+                <div class="schedule-grid"></div>
+            </div>
+        </section>
+
+        <section id="requirements">
+            <h2>Graduation Requirements</h2>
+            <div class="requirements-details">
+                <div class="requirements-card">
+                    <h3>Core Requirements</h3>
+                    <table class="requirements-table">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Requirement</th>
+                            <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td>4 years</td>
+                            <td>ENG100, 200, 300 and three terms at 500-level</td>
+                        </tr>
+                        <tr>
+                            <td>Mathematics</td>
+                            <td>Through MATH280 or 340</td>
+                            <td>Completion of Math 280 or 340</td>
+                        </tr>
+                        <tr>
+                            <td>World Languages</td>
+                            <td>3 terms at 300-level or higher</td>
+                            <td>Or 1 term at 400-level or above, or completion of two different languages with specific conditions</td>
+                        </tr>
+                        <tr>
+                            <td>Science</td>
+                            <td>Two 3-term lab sciences</td>
+                            <td>Most students complete Biology, Chemistry, and/or Physics</td>
+                        </tr>
+                        <tr>
+                            <td>History</td>
+                            <td>History 100A and 100B, 201, and 300</td>
+                            <td>Junior Year: HSS100A, HSS100B; Lower Year: HSS201; Upper Year: HSS300</td>
+                        </tr>
+                        <tr>
+                            <td>Arts</td>
+                            <td>4 terms (for 4-year students)</td>
+                            <td>Including 1 term of Art, 1 term of Music, plus 2 more of Art, Music, or Theatre and Dance</td>
+                        </tr>
+                        <tr>
+                            <td>Philosophy & Religious Studies</td>
+                            <td>1 term</td>
+                            <td>Usually taken in Lower year</td>
+                        </tr>
+                        <tr>
+                            <td>Physical Education</td>
+                            <td>1 term</td>
+                            <td>PHD200, usually taken in Lower year</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="requirements-card">
+                    <h3>Additional Requirements</h3>
+                    <ul class="requirements-list">
+                        <li><strong>Total Credits:</strong> 54 credits for 4-year students; 51 for 3-year; 48 for 2-year and 1-year students</li>
+                        <li><strong>Upper/Senior Years:</strong> 27 credits minimum across Upper and Senior years</li>
+                        <li><strong>Senior Year:</strong> 12 graded term credits minimum during Senior year</li>
+                        <li><strong>Swimming:</strong> Pass the 25-yard swim test</li>
+                        <li><strong>Standing:</strong> Must be in good standing (not on probation or suspension) at graduation</li>
+                    </ul>
+                </div>
+                <div class="requirements-card">
+                    <h3>Course Load Policies</h3>
+                    <ul class="requirements-list">
+                        <li><strong>Junior/Lower:</strong> Five or six courses per term</li>
+                        <li><strong>Upper/Senior:</strong> Typically five courses per term</li>
+                        <li><strong>Four-Course Load:</strong> Seniors may take four courses under specific conditions if three are advanced</li>
+                        <li><strong>Six-Course Load:</strong> Approval is based on academic standing and department availability</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="course-of-study">
+            <h2>Course of Study</h2>
+            <div class="pdf-viewer-container">
+                <div class="pdf-controls">
+                    <a href="CourseOfStudy.pdf" class="primary-button" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Open in New Tab
+                    </a>
+                    <a href="CourseOfStudy.pdf" class="secondary-button" download>
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+                <div class="pdf-viewer">
+                    <iframe src="CourseOfStudy.pdf" frameborder="0"></iframe>
+                </div>
+                <div class="pdf-description">
+                    <h3>About the Course of Study</h3>
+                    <p>The Phillips Academy Course of Study outlines all courses, placement information, and academic policies. It contains detailed descriptions of every course offered, prerequisites, and faculty information. This document is essential for planning your academic program at Andover.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="help">
+            <h2>Help & Resources</h2>
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>Contact Academic Advisor</h3>
+                    <p>Schedule a meeting with your advisor for course selection guidance.</p>
+                    <button class="secondary-button">Schedule Meeting</button>
+                </div>
+                <div class="help-card">
+                    <h3>Course Selection Guide</h3>
+                    <p>Download our comprehensive guide to course selection.</p>
+                    <button class="secondary-button">Download Guide</button>
+                </div>
+                <div class="help-card">
+                    <h3>Academic Skills Center</h3>
+                    <p>Get help with study skills, time management, or schedule a peer tutor.</p>
+                    <button class="secondary-button">Contact ASC</button>
+                </div>
+                <div class="help-card">
+                    <h3>Office of the Dean of Studies</h3>
+                    <p>Contact the Dean of Studies Office for any academic policy questions.</p>
+                    <button class="secondary-button">Email Office</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Phillips Academy. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
